@@ -1,24 +1,38 @@
-# README
+# Anime Apps
+## Instructions
+1. Bundle Install first
+2. run migration script
+```bash
+rails db:migrate
+```
+3. run seeding script
+```bash
+rails db:seed
+```
+4. Don't forget to run Sidekiq server and redis
+```bash
+sudo systemctl start redis-server
+```
+```bash
+bundle exec sidekiq
+```
+5. Run the apps
+```bash
+rails s
+```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Anime Apps API
+1. /api/favorites/get-top-favorite?id=2&type=&page=1&limit=5
+using parameter
+```bash
+id (user_id)
+type (all/manga/anime)
+page
+limit
+```
+2. /api/favorites/get-total-user-favorite?type=&page=1&limit=5
+```bash
+type (all/anime/manga)
+page
+limit
+```
