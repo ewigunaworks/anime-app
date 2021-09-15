@@ -1,0 +1,3 @@
+class HistoryLog < ApplicationRecord
+
+end

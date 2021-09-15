@@ -1,0 +1,60 @@
+<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left">Manga List</h3>
+    </div>
+    <div class="panel-body">
+        <div class="container-responsive">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                      <% if user_signed_in? %>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Title</th>
+                                <th>Score</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% @mangas.each do |manga| %>
+                                <tr>
+                                    <td><%= manga['rank'] %></td>
+                                    <td><%= manga['title'] %></td>
+                                    <td><%= manga['score'] %></td>
+                                    <td>
+                                      <%= link_to manga_path(manga['mal_id']), class: 'btn btn-sm btn-info', data: { toggle: 'tooltip', placement: 'top' } do %>
+                                        View Detail
+                                      <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                      <% else %>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Title</th>
+                                <th>Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% @mangas.each do |manga| %>
+                                <tr>
+                                    <td><%= manga['rank'] %></td>
+                                    <td><%= manga['title'] %></td>
+                                    <td><%= manga['score'] %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                      <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

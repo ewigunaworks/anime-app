@@ -1,0 +1,3 @@
+class MemberFavourite < ApplicationRecord
+
+end

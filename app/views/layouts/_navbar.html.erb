@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="/">The Anime App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/mangas">Manga</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/animes">Anime</a>
+        </li>
+        <% if user_signed_in? %>
+
+
+          <% if current_user.user_type == 'admin' %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/users">User</a>
+          </li>
+          <% else %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/favorites">Favorites</a>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link, text-white' %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/users/sign_in">Login</a>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>

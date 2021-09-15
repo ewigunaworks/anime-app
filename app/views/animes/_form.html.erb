@@ -1,0 +1,243 @@
+<style>
+    .card {
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+    }
+
+    .card-header {
+        padding: .75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgba(0,0,0,.03);
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        font-weight: bold;
+    }
+
+    .card-body {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+
+    .margin-top-10 {
+        margin-top:1.25rem;
+    }
+
+    label {
+      font-weight: bold;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+      <%= form_for(MemberFavourite.new, url: favorites_path, html: {class: 'form-horizontal client'}) do |f| %>
+        <%= f.hidden_field :id, value: @animes['mal_id']  %>
+        <%= f.hidden_field :score, value: @animes['score']  %>
+        <%= f.hidden_field :title, value: @animes['title']  %>
+        <%= f.hidden_field :type, value: 'anime'  %>
+        <% if @favorites_added %>
+          <%= f.submit 'Favorited', class: 'btn btn-primary btn-length-medium' %>
+        <% else %>
+            <%= f.submit 'Add to Favorite', class: 'btn btn-primary btn-length-medium' %>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+<div class="row">
+    <div class="left margin-top-10 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                Title
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <label class="col-sm-4">Title</label>
+                  <div class="col-sm-8">
+                      <%= @animes["title"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-8">
+                      <img src="<%= @animes["image_url"] %>" alt="<%= @animes['title'] %>">
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Alternatives Title
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <label class="col-sm-4">English</label>
+                  <div class="col-sm-8">
+                      <%= @animes["title_english"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Synonims</label>
+                  <div class="col-sm-8">
+                      <%= @animes["title_synonims"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">japanese</label>
+                  <div class="col-sm-8">
+                      <%= @animes["title_japanese"] %>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="card margin-top-10">
+            <div class="card-header">
+                Information
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <label class="col-sm-4">Type</label>
+                  <div class="col-sm-8">
+                      <%= @animes["type"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Episodes</label>
+                  <div class="col-sm-8">
+                      <%= @animes["episodes"] == 'null' ? @mangas["episodes"] : '-' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Source</label>
+                  <div class="col-sm-8">
+                      <%= @animes["source"] == 'null' ? @animes["source"] : '-' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Status</label>
+                  <div class="col-sm-8">
+                      <%= @animes["status"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Aired</label>
+                  <div class="col-sm-8">
+                      <%= @animes["aired"]["string"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Premiered</label>
+                  <div class="col-sm-8">
+                      <%= @animes["premiered"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Broadcast</label>
+                  <div class="col-sm-8">
+                      <%= @animes["broadcast"] == "null" ? @animes["broadcast"] : 'Unknown' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Producers</label>
+                  <div class="col-sm-8">
+                      <% @animes["producers"].each do |prod| %>
+                          <%= prod['name'] %>
+                      <% end %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Studios</label>
+                  <div class="col-sm-8">
+                    <% @animes["studios"].each do |std| %>
+                        <%= std['name'] %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Genres</label>
+                  <div class="col-sm-8">
+                      <% @animes["genres"].each do |genre| %>
+                          <%= genre['name'] %>
+                      <% end %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Duration</label>
+                  <div class="col-sm-8">
+                    <%= @animes["duration"] == "null" ? @animes["duration"] : 'Unknown' %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Rating</label>
+                  <div class="col-sm-8">
+                    <%= @animes["rating"] == "null" ? @animes["rating"] : 'Unknown' %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right margin-top-10 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                Statistics
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <label class="col-sm-4">Score</label>
+                  <div class="col-sm-8">
+                      <%= @animes["score"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Scored By</label>
+                  <div class="col-sm-8">
+                      <%= @animes["scored_by"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Ranked</label>
+                  <div class="col-sm-8">
+                      <%= @animes["rank"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Popularity</label>
+                  <div class="col-sm-8">
+                      <%= @animes["popularity"] %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-4">Members</label>
+                  <div class="col-sm-8">
+                      <%= @animes["members"] %>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="card margin-top-10">
+            <div class="card-header">
+                Synopsis
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <div class="col-sm-12">
+                      <%= @animes["synopsis"] %>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="card margin-top-10">
+            <div class="card-header">
+                Background
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <div class="col-sm-12">
+                      <%= @animes["background"] %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

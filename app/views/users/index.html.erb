@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left">User List</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="nav nav-pills">
+          <li role="presentation" class="active"><%= link_to "Add New",  new_user_path, class: 'btn btn-primary btn-length-medium btn-edit my-2' %>
+          </li>
+      </ul>
+        <div class="container-responsive">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Type</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% @users.each do |user| %>
+                                <tr>
+                                    <td><%= user['email'] %></td>
+                                    <td><%= user['user_type'] %></td>
+                                    <td>
+                                      <%= link_to user_path(user['id']), class: 'btn btn-sm btn-info', data: { toggle: 'tooltip', placement: 'top' } do %>
+                                        View Detail
+                                      <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
